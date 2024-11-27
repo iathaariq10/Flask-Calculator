@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <h1 class="text-center my-4">Kalkulator</h1>
+
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" id="basic-tab" data-toggle="tab" href="#basic">Basic</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="history-tab" data-toggle="tab" href="#history">History</a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="basic">
+                    <form method="POST">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="expression" name="expression"
+                                   value="{{ result }}">
+                        </div>
+
+                        <div class="button-container">
+                            <button type="button" class="btn btn-secondary" onclick="toggleParenthesis()">()</button>
+                            <button type="button" class="btn btn-secondary" onclick="toggleSign()">+/-</button>
+                            <button type="button" class="btn btn-secondary" onclick="appendToExpression('/')">/</button>
+                            <button type="button" class="btn btn-secondary" onclick="appendToExpression('%')">%</button>
+                        </div>
+
+                        <div class="button-container">
+                            <button type="button" class="btn btn-secondary" onclick="appendToExpression('7')">7</button>
+                            <button type="button" class="btn btn-secondary" onclick="appendToExpression('8')">8</button>
+                            <button type="button" class="btn btn-secondary" onclick="appendToExpression('9')">9</button>
+                            <button type="button" class="btn btn-secondary" onclick="appendToExpression('x')">X</button>
+                        </div>
+
+                        <div class="button-container">
+                            <button type="button" class="btn btn-secondary" onclick="appendToExpression('4')">4</button>
+                            <button type="button" class="btn btn-secondary" onclick="appendToExpression('5')">5</button>
+                            <button type="button" class="btn btn-secondary" onclick="appendToExpression('6')">6</button>
+                            <button type="button" class="btn btn-secondary" onclick="appendToExpression('-')">-</button>
+                        </div>
+
+                        <div class="button-container">
+                            <button type="button" class="btn btn-secondary" onclick="appendToExpression('1')">1</button>
+                            <button type="button" class="btn btn-secondary" onclick="appendToExpression('2')">2</button>
+                            <button type="button" class="btn btn-secondary" onclick="appendToExpression('3')">3</button>
+                            <button type="button" class="btn btn-secondary" onclick="appendToExpression('+')">+</button>
+                        </div>
+
+                        <div class="button-container">
+                            <button type="button" class="btn btn-secondary" onclick="appendToExpression('0')">0</button>
+                            <button type="button" class="btn btn-secondary" onclick="appendToExpression('.')">.</button>
+                            <button type="submit" class="btn btn-danger">=</button>
+                            <button type="button" class="btn btn-warning" onclick="clearExpression()">Clear</button>
+                            <button type="button" class="btn btn-info" onclick="backspace()">←</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="tab-pane fade" id="history">
+                    <h4>History</h4>
+                    <ul>
+                        {% for item in history %}
+                            <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/javascript/main.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
